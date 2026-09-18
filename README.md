@@ -131,5 +131,212 @@ public class Login {
 
             return "Username or password incorrect, please try again.";
         }
+
+        //Registration Main class
+        import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Create Scanner
+        Scanner input = new Scanner(System.in);
+
+        // Ask the user for their information
+        System.out.println("===== QUICKCHAT REGISTRATION =====");
+
+        System.out.print("Enter your first name: ");
+        String firstName = input.nextLine();
+
+        System.out.print("Enter your last name: ");
+        String lastName = input.nextLine();
+
+        System.out.print("Enter a username: ");
+        String username = input.nextLine();
+
+        System.out.print("Enter a password: ");
+        String password = input.nextLine();
+
+        System.out.print("Enter your South African cellphone number: ");
+        String cellPhoneNumber = input.nextLine();
+
+        // Create Login object
+        Login user = new Login(
+                username,
+                password,
+                cellPhoneNumber,
+                firstName,
+                lastName
+        );
+
+        // Register user
+        System.out.println("\n===== REGISTRATION RESULTS =====");
+
+        System.out.println(user.registerUser());
+
+        // Check if registration was successful
+        if (user.checkUserName()
+                && user.checkPasswordComplexity()
+                && user.checkCellPhoneNumber()) {
+
+            System.out.println("\nRegistration successful!");
+
+            // Login section
+            System.out.println("\n===== LOGIN =====");
+
+            System.out.print("Enter your username: ");
+            String loginUsername = input.nextLine();
+
+            System.out.print("Enter your password: ");
+            String loginPassword = input.nextLine();
+
+            // Check login
+            boolean loginSuccessful =
+                    user.loginUser(loginUsername, loginPassword);
+
+            // Display login message
+            System.out.println(
+                    user.returnLoginStatus(loginSuccessful)
+            );
+
+        } else {
+
+            System.out.println("\nPlease correct your details and register again.");
+        }
+
+        input.close();
+    }
+}
+//login test
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class LoginTest {
+
+    // Test username
+    @Test
+    public void testUsername() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertTrue(user.checkUserName());
+    }
+
+    // Test incorrect username
+    @Test
+    public void testIncorrectUsername() {
+
+        Login user = new Login(
+                "john123",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertFalse(user.checkUserName());
+    }
+
+    // Test password
+    @Test
+    public void testPassword() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertTrue(user.checkPasswordComplexity());
+    }
+
+    // Test incorrect password
+    @Test
+    public void testIncorrectPassword() {
+
+        Login user = new Login(
+                "u_1",
+                "password",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertFalse(user.checkPasswordComplexity());
+    }
+
+    // Test cellphone number
+    @Test
+    public void testCellPhoneNumber() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertTrue(user.checkCellPhoneNumber());
+    }
+
+    // Test incorrect cellphone number
+    @Test
+    public void testIncorrectCellPhoneNumber() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "0821234567",
+                "John",
+                "Smith"
+        );
+
+        assertFalse(user.checkCellPhoneNumber());
+    }
+
+    // Test successful login
+    @Test
+    public void testSuccessfulLogin() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertTrue(
+                user.loginUser("u_1", "Password1!")
+        );
+    }
+
+    // Test unsuccessful login
+    @Test
+    public void testUnsuccessfulLogin() {
+
+        Login user = new Login(
+                "u_1",
+                "Password1!",
+                "+27821234567",
+                "John",
+                "Smith"
+        );
+
+        assertFalse(
+                user.loginUser("wrong", "wrong")
+        );
+    }
+}
     }
 }
