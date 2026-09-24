@@ -130,7 +130,7 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         // Ask the user for their information
-        System.out.println("===== QUICKCHAT REGISTRATION =====");
+        System.out.println("REGISTRATION");
 
         System.out.print("Enter your first name: ");
         String firstName = input.nextLine();
@@ -157,7 +157,7 @@ public class Main {
         );
 
         // Register user
-        System.out.println("\n===== REGISTRATION RESULTS =====");
+        System.out.println("REGISTRATION RESULTS");
 
         System.out.println(user.registerUser());
 
@@ -166,10 +166,10 @@ public class Main {
                 && user.checkPasswordComplexity()
                 && user.checkCellPhoneNumber()) {
 
-            System.out.println("\nRegistration successful!");
+            System.out.println("Registration successful!");
 
             // Login section
-            System.out.println("\n===== LOGIN =====");
+            System.out.println("LOGIN");
 
             System.out.print("Enter your username: ");
             String loginUsername = input.nextLine();
@@ -188,7 +188,7 @@ public class Main {
 
         } else {
 
-            System.out.println("\nPlease correct your details and register again.");
+            System.out.println("Please correct your details and register again.");
         }
 
         input.close();
