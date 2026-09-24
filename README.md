@@ -5,14 +5,12 @@ package amukelaniPart1;
 
 public class Login {
 
-    // Variables
     private String username;
     private String password;
     private String cellPhoneNumber;
     private String firstName;
     private String lastName;
 
-    // Constructor
     public Login(String userNameInput, String passwordInput,
                  String cellPhoneInput, String firstNameInput,
                  String lastNameInput) {
@@ -23,8 +21,6 @@ public class Login {
         firstName = firstNameInput;
         lastName = lastNameInput;
     }
-
-    // Check if username is correctly formatted
     public boolean checkUserName() {
 
         if (username.contains("_") && username.length() <= 5) {
@@ -34,48 +30,41 @@ public class Login {
         }
     }
 
-    // Check if password is correctly formatted
     public boolean checkPasswordComplexity() {
 
         boolean hasCapitalLetter = false;
         boolean hasNumber = false;
         boolean hasSpecialCharacter = false;
 
-        // Check password length
         if (password.length() < 8) {
-            return false;
+              return false;
         }
 
-        // Check each character in the password
         for (int i = 0; i < password.length(); i++) {
 
             char character = password.charAt(i);
 
-            // Check for capital letter
             if (Character.isUpperCase(character)) {
                 hasCapitalLetter = true;
             }
 
-            // Check for number
+        
             if (Character.isDigit(character)) {
                 hasNumber = true;
             }
-
-            // Check for special character
+            
             if (!Character.isLetterOrDigit(character)) {
                 hasSpecialCharacter = true;
             }
         }
-
-        // Check if all requirements are met
+    
         if (hasCapitalLetter && hasNumber && hasSpecialCharacter) {
             return true;
         } else {
             return false;
         }
     }
-
-    // Check cellphone number
+    
     public boolean checkCellPhoneNumber() {
 
         if (cellPhoneNumber.matches("^\\+27[0-9]{9}$")) {
@@ -100,12 +89,11 @@ public class Login {
             return "Cell phone number incorrectly formatted or does not contain international code.";
         }
 
-        return "Username successfully captured.\n"
-                + "Password successfully captured.\n"
+        return "Username successfully captured."
+                + "Password successfully captured."
                 + "Cell phone number successfully added.";
     }
 
-    // Check if the username and password are correct
     public boolean loginUser(String usernameInput, String passwordInput) {
 
         if (username.equals(usernameInput)
@@ -119,7 +107,6 @@ public class Login {
         }
     }
 
-    // Display login status
     public String returnLoginStatus(boolean loginSuccessful) {
 
         if (loginSuccessful) {
